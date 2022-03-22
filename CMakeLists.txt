@@ -1,3 +1,5 @@
+#Should work on Windows and Linux. To make it work on Mac you have to add another "add_executable" tailored for Mac.
+
 cmake_minimum_required(VERSION 3.21)
 
 project(wxTemplate)
@@ -10,12 +12,12 @@ set(LIBS wxbase wxcore)
 
 #wxWidgets config
 #On Linux watch CMake output for possible lack of not required dependencies
-include(FetchContent)
 set(wxBUILD_SHARED ON CACHE BOOL "Build wx libraries as shared libs")
 set(wxBUILD_PRECOMP OFF CACHE BOOL "Use precompiled headers")
 set(wxBUILD_MONOLITHIC OFF CACHE BOOL "Build a single library")
 set(wxUSE_STL ON)
 
+include(FetchContent)
 Set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(
         wxWidgets
@@ -29,7 +31,7 @@ FetchContent_MakeAvailable(wxWidgets)
 #Main target config
 add_executable(${PROJECT_NAME} WIN32 ${SRC_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON)
-add_dependencies(${PROJECT_NAME} wxbase wxcore wxhtml wxnet wxxml wxxrc)
+add_dependencies(${PROJECT_NAME} wxbase wxcore wxhtml wxnet wxxml wxxrc) #Just to delay linking
 if (wxBUILD_SHARED)
     target_compile_definitions(${PROJECT_NAME} PRIVATE WXUSINGDLL=1)
 endif ()
