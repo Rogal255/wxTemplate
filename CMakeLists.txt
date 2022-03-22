@@ -1,11 +1,12 @@
-#Should work on Windows and Linux. To make it work on Mac you have to add another "add_executable" tailored for Mac.
+#Should work on Windows(MSVC) and Linux.
+#To make it work on Mac you have to add another "add_executable" tailored for Mac.
 
 cmake_minimum_required(VERSION 3.21)
 
 project(wxTemplate)
 
 #Source files list (cpp only)
-set(SRC_FILES main.cpp)
+set(SRC_FILES App.cpp Frame.cpp)
 
 #Set which libs should link to main target
 set(LIBS wxbase wxcore)
@@ -21,10 +22,10 @@ include(FetchContent)
 Set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(
         wxWidgets
-        GIT_REPOSITORY  https://github.com/wxWidgets/wxWidgets.git
-        GIT_TAG         v3.1.5
-        GIT_PROGRESS    TRUE
-        GIT_SHALLOW     TRUE
+        GIT_REPOSITORY https://github.com/wxWidgets/wxWidgets.git
+        GIT_TAG v3.1.5
+        GIT_PROGRESS TRUE
+        GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(wxWidgets)
 
