@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(wxWidgetsFetchContent)
+project(wxTemplate)
 
 #Source files list (cpp only)
 set(SRC_FILES main.cpp)
@@ -9,16 +9,18 @@ set(SRC_FILES main.cpp)
 set(LIBS wxbase wxcore)
 
 #wxWidgets config
+#On Linux watch CMake output for possible lack of not required dependencies
+include(FetchContent)
 set(wxBUILD_SHARED ON CACHE BOOL "Build wx libraries as shared libs")
 set(wxBUILD_PRECOMP OFF CACHE BOOL "Use precompiled headers")
 set(wxBUILD_MONOLITHIC OFF CACHE BOOL "Build a single library")
+set(wxUSE_STL ON)
 
-include(FetchContent)
 Set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(
         wxWidgets
         GIT_REPOSITORY  https://github.com/wxWidgets/wxWidgets.git
-        GIT_TAG         master
+        GIT_TAG         v3.1.5
         GIT_PROGRESS    TRUE
         GIT_SHALLOW     TRUE
 )
